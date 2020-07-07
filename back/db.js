@@ -98,10 +98,12 @@ const CarouselSchema = new Schema({
 
 const users = mongoose.model(process.env.COLLECTION_USER, userSchema)
 const commodity = mongoose.model(process.env.COLLECTION_COMMODITY, commoditySchema)
-const Carousel = mongoose.model(process.env.COLLECTION_CAROUSEL, CarouselSchema)
+const carousel = mongoose.model(process.env.COLLECTION_CAROUSEL, CarouselSchema)
+const connection = mongoose.connection
 
 export default {
   users,
   commodity,
-  Carousel
+  carousel,
+  connection
 }
