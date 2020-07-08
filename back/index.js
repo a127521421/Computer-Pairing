@@ -147,10 +147,11 @@ app.post('/users', async (req, res) => {
   try {
     await db.users.create({
       account: req.body.account,
-      password: md5(req.body.password)
+      password: md5(req.body.password),
+      email: req.body.email
     })
     res.status(200)
-    res.send({ success: true, message: '' })
+    res.send({ success: true, message: '註冊成功' })
   } catch (error) {
     if (error.name === 'ValidationError') {
       // 資料格式錯誤
@@ -185,7 +186,7 @@ app.post('/login', async (req, res) => {
     if (result.length > 0) {
       req.session.user = result[0].account
       res.status(200)
-      res.send({ success: true, message: '' })
+      res.send({ success: true, message: '登入成功' })
     } else {
       res.status(404)
       res.send({ success: false, message: '帳號密碼錯誤' })
@@ -214,7 +215,33 @@ app.delete('/logout', async (req, res) => {
     } else {
       res.clearCookie()
       res.status(200)
-      res.send({ success: true, message: '' })
+      res.send({ success: true, message: '登出成功' })
     }
   })
+})
+
+// 修改密碼
+app.patch('/update/:id', async (req, res) => {
+  // 拒絕不是 json 的資料格式
+  if (req.headers['content-type'] !== 'application/json') {
+    // 回傳錯誤狀態碼
+    res.status(400)
+    res.send({ success: false, message: '格式不符' })
+    return
+  }
+  try {
+    await db.users.findByIdAndUpdate(req.params.id, { password: md5(req.body.password) }, { new: true })
+    res.status(200)
+    res.send({ success: true, message: '' })
+    return
+  } catch (error) {
+    console.log(error)
+    res.status(500)
+    res.send({ success: false, message: '發生錯誤' })
+  }
+})
+
+app.listen(process.env.PORT, () => {
+  console.log('已啟動')
+  console.log('http://localhost:3000')
 })

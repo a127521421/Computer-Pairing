@@ -12,8 +12,10 @@ dotenv.config()
 
 const Schema = mongoose.Schema
 
-// 連線到本機的 mongodb 的 ComputerPairing 資料庫
-mongoose.connect(process.env.DBURL)
+// (因警告而新增)
+mongoose.set('useCreateIndex', true)
+// 連線到本機的 mongodb 的 ComputerPairing 資料庫 (因警告而新增)
+mongoose.connect(process.env.DBURL, { useNewUrlParser: true, useUnifiedTopology: true })
 // 使用插件
 mongoose.plugin(beautifyUnique)
 
