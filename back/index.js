@@ -138,6 +138,7 @@ const upload = multer({
 
 // 註冊設定
 app.post('/users', async (req, res) => {
+  // 判斷是否為json格式
   if (!req.headers['content-type'].includes('application/json')) {
     res.status(400)
     res.send({ success: false, message: '格式不符' })
@@ -145,6 +146,7 @@ app.post('/users', async (req, res) => {
   }
 
   try {
+    // 新增資料
     await db.users.create({
       account: req.body.account,
       password: md5(req.body.password),
@@ -169,6 +171,7 @@ app.post('/users', async (req, res) => {
 
 // 登入設定
 app.post('/login', async (req, res) => {
+  // 判斷是否為json格式
   if (!req.headers['content-type'].includes('application/json')) {
     res.status(400)
     res.send({ success: false, message: '格式不符' })
@@ -176,6 +179,7 @@ app.post('/login', async (req, res) => {
   }
 
   try {
+    // 尋找資料
     const result = await db.users.find(
       {
         account: req.body.account,
@@ -230,6 +234,7 @@ app.patch('/update/:id', async (req, res) => {
     return
   }
   try {
+    // 尋找後修改
     await db.users.findByIdAndUpdate(req.params.id, { password: md5(req.body.password) }, { new: true })
     res.status(200)
     res.send({ success: true, message: '' })
@@ -240,6 +245,7 @@ app.patch('/update/:id', async (req, res) => {
     res.send({ success: false, message: '發生錯誤' })
   }
 })
+// 商品檔案上傳
 
 app.listen(process.env.PORT, () => {
   console.log('已啟動')
