@@ -85,19 +85,9 @@ app.use(session({
 }))
 
 // 檔案上傳設定(位置)
+// 需注意上傳到哪裡
 let storage
-if (process.env.FTP === false) {
-  // 開發環境將上傳檔案放本機
-  storage = multer.diskStorage({
-    destination (req, file, cb) {
-      cb(null, 'images/')
-    },
-    // 檔名
-    filename (req, file, cb) {
-      cb(null, Date.now() + path.extname(file.originalname))
-    }
-  })
-} else {
+if (process.env.FTP === true) {
   // heroku 將上傳檔案放伺服器
   storage = new FTPStorage({
     // 上傳伺服器的根目錄
@@ -111,6 +101,17 @@ if (process.env.FTP === false) {
     },
     destination (req, file, options, cb) {
       cb(null, options.basepath + Date.now() + path.extname(file.originalname))
+    }
+  })
+} else {
+  // 開發環境將上傳檔案放本機
+  storage = multer.diskStorage({
+    destination (req, file, cb) {
+      cb(null, 'images/')
+    },
+    // 檔名
+    filename (req, file, cb) {
+      cb(null, Date.now() + path.extname(file.originalname))
     }
   })
 }
@@ -245,7 +246,77 @@ app.patch('/update/:id', async (req, res) => {
     res.send({ success: false, message: '發生錯誤' })
   }
 })
+
 // 商品檔案上傳
+app.post('/commodity', async (req, res) => {
+  // 沒有登入
+  // if (req.session.user === undefined) {
+  //   res.status(401)
+  //   res.send({ success: false, message: '未登入' })
+  //   return
+  // }
+  // multipart 有包含檔案
+  // form-data form 傳出的資料
+  if (!req.headers['content-type'].includes('multipart/form-data')) {
+    res.status(400)
+    res.send({ success: false, message: '格式不符' })
+    return
+  }
+
+  // 有一個上傳進來的檔案，欄位是 image
+  // req，進來的東西
+  // res，要出去的東西
+  // err，檔案上傳的錯誤
+  // upload.single(欄位)(req, res, 上傳完畢的 function)
+  upload.single('image')(req, res, async error => {
+    if (error instanceof multer.MulterError) {
+      // 上傳錯誤
+      let message = ''
+      if (error.code === 'LIMIT_FILE_SIZE') {
+        message = '檔案太大'
+      } else {
+        message = '格式不符'
+      }
+      res.status(400)
+      res.send({ success: false, message })
+    } else if (error) {
+      res.status(500)
+      res.send({ success: false, message: '伺服器錯誤' })
+    } else {
+      try {
+        let image = ''
+        if (process.env.FTP === 'true') {
+          image = path.basename(req.file.path)
+        } else {
+          image = req.file.filename
+        }
+        const result = await db.commodity.create(
+          {
+            name: req.body.name,
+            price: req.body.price,
+            description: req.body.description,
+            count: req.body.count,
+            image
+          }
+        )
+        res.status(200)
+        res.send({ success: true, message: '商品上傳成功', image, _id: result._id })
+      } catch (error) {
+        if (error.name === 'ValidationError') {
+          // 資料格式錯誤
+          const key = Object.keys(error.errors)[0]
+          const message = error.errors[key].message
+          res.status(400)
+          res.send({ success: false, message })
+        } else {
+          // 伺服器錯誤
+          res.status(500)
+          res.send({ success: false, message: '伺服器錯誤' })
+        }
+      }
+    }
+  })
+})
 
 app.listen(process.env.PORT, () => {
   console.log('已啟動')
