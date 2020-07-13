@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import store from '../store/index'
+// import store from '../store/index'
 
 Vue.use(VueRouter)
 
@@ -34,9 +34,9 @@ const routes = [
     }
   },
   {
-    path: '/shooping',
-    name: 'Shooping',
-    component: () => import(/* webpackChunkName: "shooping" */ '../views/Shooping.vue'),
+    path: '/shopping',
+    name: 'Shopping',
+    component: () => import(/* webpackChunkName: "shopping" */ '../views/Shopping.vue'),
     meta: {
       login: true,
       title: 'CP | 目錄'
@@ -49,13 +49,13 @@ const router = new VueRouter({
 })
 
 // 在跳轉頁面前判斷是否登陸
-router.beforeEach((to, from, next) => {
-  if (to.meta.login && !store.state.user) {
-    next('/login')
-  } else {
-    next()
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   if (to.meta.login && !store.state.user) {
+//     next('/login')
+//   } else {
+//     next()
+//   }
+// })
 
 // 顯示標題
 router.afterEach((to, from) => {

@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
-    123
+  <div class="shopping">
+    0
   </div>
 </template>
