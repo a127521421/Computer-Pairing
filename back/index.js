@@ -137,7 +137,7 @@ const upload = multer({
   }
 })
 
-// 註冊設定
+// 註冊設定(前台)
 app.post('/users', async (req, res) => {
   // 判斷是否為json格式
   if (!req.headers['content-type'].includes('application/json')) {
@@ -170,7 +170,7 @@ app.post('/users', async (req, res) => {
   }
 })
 
-// 登入設定
+// 登入設定(前台)
 app.post('/login', async (req, res) => {
   // 判斷是否為json格式
   if (!req.headers['content-type'].includes('application/json')) {
@@ -211,7 +211,7 @@ app.post('/login', async (req, res) => {
   }
 })
 
-// 登出設定
+// 登出設定(前台)
 app.delete('/logout', async (req, res) => {
   req.session.destroy(error => {
     if (error) {
@@ -225,8 +225,8 @@ app.delete('/logout', async (req, res) => {
   })
 })
 
-// 修改密碼
-app.patch('/update/:id', async (req, res) => {
+// 修改密碼(會員後台)
+app.patch('/usersupdate/:id', async (req, res) => {
   // 拒絕不是 json 的資料格式
   if (req.headers['content-type'] !== 'application/json') {
     // 回傳錯誤狀態碼
@@ -238,7 +238,7 @@ app.patch('/update/:id', async (req, res) => {
     // 尋找後修改
     await db.users.findByIdAndUpdate(req.params.id, { password: md5(req.body.password) }, { new: true })
     res.status(200)
-    res.send({ success: true, message: '' })
+    res.send({ success: true, message: '密碼修改成功' })
     return
   } catch (error) {
     console.log(error)
@@ -247,14 +247,35 @@ app.patch('/update/:id', async (req, res) => {
   }
 })
 
-// 商品檔案上傳
+// 會員資料刪除(管理員後台)
+app.delete('/usersupdate/:id', async (req, res) => {
+  try {
+    let result = ''
+    // findByIdAndUpdate 預設回傳的是更新前的資料
+    // 設定 new true 後會變成回傳新的資料
+    result = await db.users.findByIdAndDelete(req.params.id)
+    if (result === null) {
+      res.status(404)
+      res.send({ success: true, message: '找不到資料' })
+    } else {
+      res.status(200)
+      res.send({ success: true, message: '會員資料刪除成功' })
+    }
+  } catch (error) {
+    if (error.name === 'CastError') {
+      // ID 格式不是 MongoDB 的格式
+      res.status(400)
+      res.send({ success: false, message: 'ID 格式錯誤' })
+    } else {
+      // 伺服器錯誤
+      res.status(500)
+      res.send({ success: false, message: '伺服器錯誤' })
+    }
+  }
+})
+
+// 商品檔案上傳(管理員後台)
 app.post('/commodity', async (req, res) => {
-  // 沒有登入
-  // if (req.session.user === undefined) {
-  //   res.status(401)
-  //   res.send({ success: false, message: '未登入' })
-  //   return
-  // }
   // multipart 有包含檔案
   // form-data form 傳出的資料
   if (!req.headers['content-type'].includes('multipart/form-data')) {
@@ -318,6 +339,155 @@ app.post('/commodity', async (req, res) => {
   })
 })
 
+// 商品檔案修改(管理員後台)
+app.patch('/commodity/:id', async (req, res) => {
+  if (!req.headers['content-type'].includes('application/json')) {
+    res.status(400)
+    res.send({ success: false, message: '格式不符' })
+    return
+  }
+  try {
+    // findByIdAndUpdate 預設回傳的是更新前的資料
+    // 設定 new true 後會變成回傳新的資料
+    await db.commodity.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    res.status(200)
+    res.send({ success: true, message: '商品修改成功' })
+  } catch (error) {
+    console.log(error)
+    if (error.name === 'CastError') {
+      // ID 格式不是 MongoDB 的格式
+      res.status(400)
+      res.send({ success: false, message: 'ID 格式錯誤' })
+    } else if (error.name === 'ValidationError') {
+      // 資料格式錯誤
+      const key = Object.keys(error.errors)[0]
+      const message = error.errors[key].message
+      res.status(400)
+      res.send({ success: false, message })
+    } else {
+      // 伺服器錯誤
+      res.status(500)
+      res.send({ success: false, message: '伺服器錯誤' })
+    }
+  }
+})
+
+// 商品檔案刪除(管理員後台)
+app.delete('/commodity/:id', async (req, res) => {
+  try {
+    let result = ''
+    // findByIdAndUpdate 預設回傳的是更新前的資料
+    // 設定 new true 後會變成回傳新的資料
+    result = await db.commodity.findByIdAndDelete(req.params.id)
+    if (result === null) {
+      res.status(404)
+      res.send({ success: true, message: '找不到資料' })
+    } else {
+      res.status(200)
+      res.send({ success: true, message: '商品檔案刪除成功' })
+    }
+  } catch (error) {
+    if (error.name === 'CastError') {
+      // ID 格式不是 MongoDB 的格式
+      res.status(400)
+      res.send({ success: false, message: 'ID 格式錯誤' })
+    } else {
+      // 伺服器錯誤
+      res.status(500)
+      res.send({ success: false, message: '伺服器錯誤' })
+    }
+  }
+})
+
+// 輪播圖上傳(管理員後台)
+app.post('/carousel', async (req, res) => {
+  // multipart 有包含檔案
+  // form-data form 傳出的資料
+  if (!req.headers['content-type'].includes('multipart/form-data')) {
+    res.status(400)
+    res.send({ success: false, message: '格式不符' })
+    return
+  }
+
+  // 有一個上傳進來的檔案，欄位是 image
+  // req，進來的東西
+  // res，要出去的東西
+  // err，檔案上傳的錯誤
+  // upload.single(欄位)(req, res, 上傳完畢的 function)
+  upload.single('image')(req, res, async error => {
+    if (error instanceof multer.MulterError) {
+      // 上傳錯誤
+      let message = ''
+      if (error.code === 'LIMIT_FILE_SIZE') {
+        message = '檔案太大'
+      } else {
+        message = '格式不符'
+      }
+      res.status(400)
+      res.send({ success: false, message })
+    } else if (error) {
+      res.status(500)
+      res.send({ success: false, message: '伺服器錯誤' })
+    } else {
+      try {
+        let image = ''
+        if (process.env.FTP === 'true') {
+          image = path.basename(req.file.path)
+        } else {
+          image = req.file.filename
+        }
+        const result = await db.carousel.create(
+          {
+            image
+          }
+        )
+        res.status(200)
+        res.send({ success: true, message: '輪播圖上傳成功', image, _id: result._id })
+      } catch (error) {
+        if (error.name === 'ValidationError') {
+          // 資料格式錯誤
+          const key = Object.keys(error.errors)[0]
+          const message = error.errors[key].message
+          res.status(400)
+          res.send({ success: false, message })
+        } else {
+          // 伺服器錯誤
+          res.status(500)
+          res.send({ success: false, message: '伺服器錯誤' })
+        }
+      }
+    }
+  })
+})
+
+// 輪播圖刪除(管理員後台)
+app.delete('/carousel/:id', async (req, res) => {
+  try {
+    let result = ''
+    // findByIdAndUpdate 預設回傳的是更新前的資料
+    // 設定 new true 後會變成回傳新的資料
+    result = await db.carousel.findByIdAndDelete(req.params.id)
+    if (result === null) {
+      res.status(404)
+      res.send({ success: true, message: '找不到資料' })
+    } else {
+      res.status(200)
+      res.send({ success: true, message: '輪播圖刪除成功' })
+    }
+  } catch (error) {
+    if (error.name === 'CastError') {
+      // ID 格式不是 MongoDB 的格式
+      res.status(400)
+      res.send({ success: false, message: 'ID 格式錯誤' })
+    } else {
+      // 伺服器錯誤
+      res.status(500)
+      res.send({ success: false, message: '伺服器錯誤' })
+    }
+  }
+})
+
+// 監聽
 app.listen(process.env.PORT, () => {
   console.log('已啟動')
   console.log('http://localhost:3000')

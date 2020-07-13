@@ -14,6 +14,8 @@ const Schema = mongoose.Schema
 
 // (因警告而新增)
 mongoose.set('useCreateIndex', true)
+// (因警告而新增)
+mongoose.set('useFindAndModify', false)
 // 連線到本機的 mongodb 的 ComputerPairing 資料庫 (因警告而新增)
 mongoose.connect(process.env.DBURL, { useNewUrlParser: true, useUnifiedTopology: true })
 // 使用插件
