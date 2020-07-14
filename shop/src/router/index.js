@@ -41,6 +41,15 @@ const routes = [
       login: true,
       title: 'CP | 目錄'
     }
+  },
+  {
+    path: '/user',
+    name: 'User',
+    component: () => import(/* webpackChunkName: "user" */ '../views/User.vue'),
+    meta: {
+      login: true,
+      title: 'CP | 會員中心'
+    }
   }
 ]
 

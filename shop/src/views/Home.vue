@@ -1,5 +1,56 @@
 <template>
   <div class="home">
-    123
+    <b-carousel
+      id="carousel-1"
+      v-model="slide"
+      :interval="5000"
+      fade
+      controls
+      indicators
+      background="#ababab"
+      img-width="100%"
+      img-height="auto"
+      style="text-shadow: 1px 1px 2px #333;"
+      @sliding-start="onSlideStart"
+      @sliding-end="onSlideEnd"
+    >
+      <!-- 輪播圖 -->
+      <b-carousel-slide v-for="(carousel, idx) in carousels" :key="idx" :img-src="carousels.src">
+      </b-carousel-slide>
+    </b-carousel>
+
   </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      slide: 0,
+      sliding: null,
+      carousel: []
+    }
+  },
+  methods: {
+    onSlideStart (slide) {
+      this.sliding = true
+    },
+    onSlideEnd (slide) {
+      this.sliding = false
+    }
+  },
+  mounted () {
+    this.axios.get(process.env.VUE_APP_APIURL + '/carousel')
+      .then(response => {
+        this.carousels = response.data.result.map(d => {
+          return {
+            src: process.env.VUE_APP_APIURL + '/carousel/' + d.name
+          }
+        })
+      })
+      .catch(() => {
+        alert('發生錯誤')
+      })
+  }
+}
+</script>
