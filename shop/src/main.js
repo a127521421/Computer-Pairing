@@ -9,6 +9,13 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faSignInAlt, faSignOutAlt, faRegistered, faHouseUser } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faSignInAlt, faSignOutAlt, faRegistered, faHouseUser)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
 // 讓 axios 預設會傳認證資訊，原本是不會傳
 axios.defaults.withCredentials = true
 
