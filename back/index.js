@@ -227,6 +227,12 @@ app.delete('/logout', async (req, res) => {
 
 // 修改密碼(會員後台)
 app.patch('/usersupdate/:id', async (req, res) => {
+  // 檢查是否有登錄
+  if (req.session.user === undefined) {
+    res.status(401)
+    res.send({ success: false, message: '未登入' })
+    return
+  }
   // 拒絕不是 json 的資料格式
   if (req.headers['content-type'] !== 'application/json') {
     // 回傳錯誤狀態碼
@@ -415,13 +421,14 @@ app.post('/carousel', async (req, res) => {
   // err，檔案上傳的錯誤
   // upload.single(欄位)(req, res, 上傳完畢的 function)
   upload.single('image')(req, res, async error => {
+    console.log(error)
     if (error instanceof multer.MulterError) {
       // 上傳錯誤
       let message = ''
       if (error.code === 'LIMIT_FILE_SIZE') {
         message = '檔案太大'
       } else {
-        message = '格式不符'
+        message = '格式不符2'
       }
       res.status(400)
       res.send({ success: false, message })
@@ -458,6 +465,35 @@ app.post('/carousel', async (req, res) => {
       }
     }
   })
+})
+
+// 輪播圖-找圖片資料
+app.get('/carousel', async (req, res) => {
+  try {
+    const result = await db.carousel.find()
+    res.status(200)
+    res.send({ success: true, message: '', result })
+  } catch (error) {
+    res.status(500)
+    res.send({ success: false, message: '伺服器錯誤' })
+  }
+})
+
+// 輪播圖-給圖片檔
+app.get('/carousel/:name', async (req, res) => {
+  if (process.env.FTP === 'flase') {
+    const path = process.cwd() + '/images/' + req.params.name
+    const exists = fs.existsSync(path)
+    if (exists) {
+      res.status(200)
+      res.sendFile(path)
+    } else {
+      res.status(404)
+      res.send({ success: false, message: '找不到圖片' })
+    }
+  } else {
+    res.redirect('http://' + process.env.FTP_HOST + '/' + process.env.FTP_USER + '/' + req.params.name)
+  }
 })
 
 // 輪播圖刪除(管理員後台)
