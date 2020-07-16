@@ -62,7 +62,7 @@ app.use(cors({
 // 設定登陸狀態
 app.use(session({
   // 密鑰，加密認證資料用(可隨便亂打)
-  secret: 'album',
+  secret: 'computer',
   // 將 session 存入 mongodb
   store: new MongoStore({
     // 使用 mongoose 的資料庫連接
@@ -421,7 +421,6 @@ app.post('/carousel', async (req, res) => {
   // err，檔案上傳的錯誤
   // upload.single(欄位)(req, res, 上傳完畢的 function)
   upload.single('image')(req, res, async error => {
-    console.log(error)
     if (error instanceof multer.MulterError) {
       // 上傳錯誤
       let message = ''
@@ -480,9 +479,9 @@ app.get('/carousel', async (req, res) => {
 })
 
 // 輪播圖-給圖片檔
-app.get('/carousel/:name', async (req, res) => {
-  if (process.env.FTP === 'flase') {
-    const path = process.cwd() + '/images/' + req.params.name
+app.get('/carousel/:image', async (req, res) => {
+  if (process.env.FTP === 'false') {
+    const path = process.cwd() + '/images/' + req.params.image
     const exists = fs.existsSync(path)
     if (exists) {
       res.status(200)
@@ -492,7 +491,7 @@ app.get('/carousel/:name', async (req, res) => {
       res.send({ success: false, message: '找不到圖片' })
     }
   } else {
-    res.redirect('http://' + process.env.FTP_HOST + '/' + process.env.FTP_USER + '/' + req.params.name)
+    res.redirect('http://' + process.env.FTP_HOST + '/' + process.env.FTP_USER + '/' + req.params.image)
   }
 })
 
