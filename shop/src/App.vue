@@ -37,15 +37,24 @@
       </b-container>
     </b-navbar>
       <router-view/>
+    <footer>
+      <span>Computer pairing 版權所有 © All Rights Reserved.</span>
+    </footer>
   </div>
 </template>
 
 <style>
 #app {
-  height:100vh;
+  height:100%;
   background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%);
 }
 #icon {
   font-size: 1.5rem;
+}
+footer {
+  text-align: center;
+  color: black;
+  font-size: 2rem;
+  font-family: '微軟正黑體';
 }
 </style>
