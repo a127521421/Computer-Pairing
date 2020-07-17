@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div id="home">
     <b-carousel
       id="carousel-1"
       v-model="slide"
@@ -18,7 +18,6 @@
       <b-carousel-slide v-for="(carousel, idx) in carousels" :key="idx" :img-src="carousel.src">
       </b-carousel-slide>
     </b-carousel>
-
   </div>
 </template>
 <style>

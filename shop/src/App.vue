@@ -17,20 +17,20 @@
           </b-navbar-nav>
           <b-navbar-nav class="ml-auto">
             <!-- 登入 -->
-            <b-nav-item to="/login">
-              <font-awesome-icon :icon="['fas', 'sign-in-alt']" id="icon"></font-awesome-icon>
+            <b-nav-item v-if="user.length === 0" to="/login">
+              <font-awesome-icon :icon="['fas', 'sign-in-alt']" id="icon" title="登入"></font-awesome-icon>
             </b-nav-item>
             <!-- 個人資料 -->
-            <b-nav-item to="/user">
-              <font-awesome-icon :icon="['fas', 'house-user']" id="icon"></font-awesome-icon>
+            <b-nav-item v-else to="/user">
+              <font-awesome-icon :icon="['fas', 'house-user']" id="icon" title="個人資料"></font-awesome-icon>
             </b-nav-item>
             <!-- 註冊 -->
-            <b-nav-item to="/reg">
-              <font-awesome-icon :icon="['fas', 'registered']" id="icon"></font-awesome-icon>
+            <b-nav-item v-if="user.length === 0" to="/reg">
+              <font-awesome-icon :icon="['fas', 'registered']" id="icon" title="註冊"></font-awesome-icon>
             </b-nav-item>
             <!-- 登出 -->
-            <b-nav-item>
-              <font-awesome-icon :icon="['fas', 'sign-out-alt']" id="icon"></font-awesome-icon>
+            <b-nav-item v-else @click="logout">
+              <font-awesome-icon :icon="['fas', 'sign-out-alt']" id="icon" title="登出"></font-awesome-icon>
             </b-nav-item>
           </b-navbar-nav>
         </b-collapse>
@@ -44,8 +44,11 @@
 </template>
 
 <style>
-#app {
-  height:100%;
+html, body{
+  height: 100%;
+}
+#app{
+  min-height: 100%;
   background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%);
 }
 #icon {
@@ -58,3 +61,76 @@ footer {
   font-family: '微軟正黑體';
 }
 </style>
+
+<script>
+export default {
+  name: 'app',
+  computed: {
+    user () {
+      return this.$store.getters.user
+    }
+  },
+  methods: {
+    logout () {
+      this.axios.delete(process.env.VUE_APP_APIURL + '/logout')
+        .then(response => {
+          const data = response.data
+          if (data.success) {
+            // 如果回來的資料 success 是 true
+            alert('登出成功')
+            // 呼叫 vuex 的登入
+            this.$store.commit('logout')
+            // 跳到登出後的首頁
+            // rotue 可以知道訊息
+            // console.log(this.$route)
+            // 如果現在不是在首頁，跳到登出後的首頁
+            // router 可以操作
+            if (this.$route.path !== '/') {
+              this.$router.push('/')
+            }
+          } else {
+            // 不是就顯示回來的 message
+            alert(data.message)
+          }
+        })
+        .catch(error => {
+          // 如果回來的狀態不是 200，顯示回來的 message
+          alert(error.response.data.message)
+        })
+    },
+    heartbeat () {
+      this.axios.get(process.env.VUE_APP_APIURL + '/heartbeat')
+        .then(response => {
+          const data = response.data
+          // 如果是登入中
+          if (this.user.length > 0) {
+            // 如果後端登入時間過期
+            if (!data) {
+              alert('登入時效已過')
+              // 前端登出
+              this.$store.commit('logout')
+              // 如果現在不是在首頁，跳到登出後的首頁
+              if (this.$route.path !== '/') {
+                this.$router.push('/')
+              }
+            }
+          }
+        })
+        .catch(() => {
+          alert('發生錯誤')
+          this.$store.commit('logout')
+          // 如果現在不是在首頁，跳到登出後的首頁
+          if (this.$route.path !== '/') {
+            this.$router.push('/')
+          }
+        })
+    }
+  },
+  mounted () {
+    this.heartbeat()
+    setInterval(() => {
+      this.heartbeat()
+    }, 1000 * 5)
+  }
+}
+</script>
