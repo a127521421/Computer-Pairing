@@ -150,8 +150,8 @@ app.post('/users', async (req, res) => {
     // 新增資料
     await db.users.create({
       account: req.body.account,
-      password: md5(req.body.password),
-      email: req.body.email
+      password: md5(req.body.password)
+      // email: req.body.email
     })
     res.status(200)
     res.send({ success: true, message: '註冊成功' })

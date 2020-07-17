@@ -5,7 +5,7 @@ import dotenv from 'dotenv'
 // 讓 mongoose 支援 unique 錯誤訊息
 import beautifyUnique from 'mongoose-beautiful-unique-validation'
 // 驗證
-import validator from 'validator'
+// import validator from 'validator'
 
 // 啟動環境
 dotenv.config()
@@ -35,22 +35,22 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: [true, '請輸入密碼']
-  },
-  // 電子郵件
-  email: {
-    type: String,
-    require: [true, '信箱必填'],
-    // 自訂驗證規則
-    validata: {
-      // 驗證 function
-      validata (value) {
-        // 使用驗證套件檢查是不是 email
-        return validator.isEmail(value)
-      },
-      // 錯誤訊息
-      message: '信箱格式錯誤'
-    }
   }
+  // 電子郵件
+  // email: {
+  //   type: String,
+  //   require: [true, '信箱必填'],
+  //   // 自訂驗證規則
+  //   validata: {
+  //     // 驗證 function
+  //     validata (value) {
+  //       // 使用驗證套件檢查是不是 email
+  //       return validator.isEmail(value)
+  //     },
+  //     // 錯誤訊息
+  //     message: '信箱格式錯誤'
+  //   }
+  // }
 }, {
   // 不要紀錄資料修改次數
   versionKey: false
