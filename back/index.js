@@ -466,7 +466,7 @@ app.post('/carousel', async (req, res) => {
   })
 })
 
-// 輪播圖-找圖片資料
+// 輪播圖-找圖片資料(前台)
 app.get('/carousel', async (req, res) => {
   try {
     const result = await db.carousel.find()
@@ -478,7 +478,7 @@ app.get('/carousel', async (req, res) => {
   }
 })
 
-// 輪播圖-給圖片檔
+// 輪播圖-給圖片檔(前台)
 app.get('/carousel/:image', async (req, res) => {
   if (process.env.FTP === 'false') {
     const path = process.cwd() + '/images/' + req.params.image
@@ -520,6 +520,16 @@ app.delete('/carousel/:id', async (req, res) => {
       res.send({ success: false, message: '伺服器錯誤' })
     }
   }
+})
+
+// 刷新登陸狀態(前台)
+app.get('/heartbeat', async (req, res) => {
+  let islogin = false
+  if (req.session.user !== undefined) {
+    islogin = true
+  }
+  res.status(200)
+  res.send(islogin)
 })
 
 // 監聽
