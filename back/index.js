@@ -191,7 +191,7 @@ app.post('/login', async (req, res) => {
     if (result.length > 0) {
       req.session.user = result[0].account
       res.status(200)
-      res.send({ success: true, message: '登入成功' })
+      res.send({ success: true, message: '登入成功', result: result[0] })
     } else {
       res.status(404)
       res.send({ success: false, message: '帳號密碼錯誤' })
@@ -234,7 +234,7 @@ app.patch('/usersupdate/:id', async (req, res) => {
     return
   }
   // 拒絕不是 json 的資料格式
-  if (req.headers['content-type'] !== 'application/json') {
+  if (!req.headers['content-type'].includes('application/json')) {
     // 回傳錯誤狀態碼
     res.status(400)
     res.send({ success: false, message: '格式不符' })
