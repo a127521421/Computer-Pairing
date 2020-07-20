@@ -30,8 +30,23 @@
         </b-col>
       </b-row>
     </b-container>
+    <footer id="loginfooter">
+      <span>Computer pairing 版權所有 © All Rights Reserved.</span>
+    </footer>
   </div>
 </template>
+
+<style>
+#loginfooter {
+  text-align: center;
+  color: black;
+  font-size: 2rem;
+  font-family: '微軟正黑體';
+  position: absolute;
+  bottom: 0;
+  transform: translate(50%);
+}
+</style>
 
 <script>
 export default {
@@ -75,7 +90,7 @@ export default {
             // 如果回來的資料 success 是 true
             alert('登入成功')
             // 呼叫 vuex 的登入
-            this.$store.commit('login', this.account)
+            this.$store.commit('login', data.result)
             // 跳到首頁
             this.$router.push('/')
           } else {

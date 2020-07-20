@@ -37,9 +37,6 @@
       </b-container>
     </b-navbar>
       <router-view/>
-    <footer>
-      <span>Computer pairing 版權所有 © All Rights Reserved.</span>
-    </footer>
   </div>
 </template>
 
@@ -54,12 +51,9 @@ html, body{
 #icon {
   font-size: 1.5rem;
 }
-footer {
-  text-align: center;
-  color: black;
-  font-size: 2rem;
-  font-family: '微軟正黑體';
-}
+h1,h3{
+    font-family: '微軟正黑體';
+  }
 </style>
 
 <script>

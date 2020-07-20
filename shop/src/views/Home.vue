@@ -18,6 +18,9 @@
       <b-carousel-slide v-for="(carousel, idx) in carousels" :key="idx" :img-src="carousel.src">
       </b-carousel-slide>
     </b-carousel>
+    <footer id="homefooter">
+      <span>Computer pairing 版權所有 © All Rights Reserved.</span>
+    </footer>
   </div>
 </template>
 <style>
@@ -27,6 +30,12 @@
     object-fit: cover;
     object-position: center;
   }
+  #homefooter {
+  text-align: center;
+  color: black;
+  font-size: 2rem;
+  font-family: '微軟正黑體';
+}
 </style>
 <script>
 export default {
