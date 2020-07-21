@@ -29,22 +29,31 @@
           </b-form>
         </b-col>
       </b-row>
+      <footer id="loginfooter">
+        <span>Computer pairing 版權所有 © All Rights Reserved.</span>
+      </footer>
     </b-container>
-    <footer id="loginfooter">
-      <span>Computer pairing 版權所有 © All Rights Reserved.</span>
-    </footer>
   </div>
 </template>
 
 <style>
 #loginfooter {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
   text-align: center;
   color: black;
   font-size: 2rem;
   font-family: '微軟正黑體';
   position: absolute;
   bottom: 0;
-  transform: translate(50%);
+  left:50%;
+  transform: translate(-50%);
+}
+@media (max-width: 576px) {
+  #loginfooter {
+    font-size:1rem;
+  }
 }
 </style>
 
@@ -91,8 +100,12 @@ export default {
             alert('登入成功')
             // 呼叫 vuex 的登入
             this.$store.commit('login', data.result)
-            // 跳到首頁
-            this.$router.push('/')
+            if (this.account === '1234') {
+              this.$router.push('/administrator')
+            } else {
+              // 跳到首頁
+              this.$router.push('/')
+            }
           } else {
             // 不是就顯示回來的 message
             alert(data.message)

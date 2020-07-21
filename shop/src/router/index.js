@@ -59,6 +59,15 @@ const routes = [
       login: true,
       title: 'CP | 會員中心-修改密碼'
     }
+  },
+  {
+    path: '/administrator',
+    name: 'Administrator',
+    component: () => import(/* webpackChunkName: "administrator" */ '../views/Administrator.vue'),
+    meta: {
+      login: true,
+      title: 'CP | 管理員'
+    }
   }
 ]
 

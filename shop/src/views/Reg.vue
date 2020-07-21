@@ -47,7 +47,8 @@
   font-family: '微軟正黑體';
   position: absolute;
   bottom: 0;
-  transform: translate(50%);
+  left:50%;
+  transform: translate(-50%);
 }
 </style>
 

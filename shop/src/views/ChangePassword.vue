@@ -15,8 +15,24 @@
         </b-col>
       </b-row>
     </b-container>
+    <footer id="passwordfooter">
+      <span>Computer pairing 版權所有 © All Rights Reserved.</span>
+    </footer>
   </div>
 </template>
+
+<style>
+#passwordfooter {
+  text-align: center;
+  color: black;
+  font-size: 2rem;
+  font-family: '微軟正黑體';
+  position: absolute;
+  bottom: 0;
+  left:50%;
+  transform: translate(-50%);
+}
+</style>
 
 <script>
 export default {

@@ -1,6 +1,22 @@
 <template>
   <div id="shopping">
-    商品目錄
+    <b-container class="text-center">
+      <h1>商品目錄</h1>
+      <b-row>
+        <b-col v-for="(commodity, idx) in commoditys" :key="idx" cols="12" md="6" lg="3" class="d-flex">
+          <b-card
+            :img-src="commodity.src"
+            img-alt="Image"
+            img-top
+            style="max-width:300px;max-height:500px"
+          >
+            <b-card-text>
+              {{commodity.name}}
+            </b-card-text>
+          </b-card>
+        </b-col>
+      </b-row>
+    </b-container>
     <footer id="shoopfooter">
       <span>Computer pairing 版權所有 © All Rights Reserved.</span>
     </footer>
@@ -8,13 +24,50 @@
 </template>
 
 <style>
+.row {
+  justify-content:center;
+}
+.d-flex{
+  justify-content:center;
+}
+.card{
+  margin-bottom: 2rem;
+}
 #shoopfooter {
   text-align: center;
   color: black;
   font-size: 2rem;
   font-family: '微軟正黑體';
-  position: absolute;
+  position: relative;
   bottom: 0;
-  transform: translate(50%);
+  left:50%;
+  transform: translate(-50%);
 }
 </style>
+
+<script>
+export default {
+  data () {
+    return {
+      commoditys: []
+    }
+  },
+  mounted () {
+    this.axios.get(process.env.VUE_APP_APIURL + '/commodity')
+      .then(response => {
+        this.commoditys = response.data.result.map(d => {
+          return {
+            name: d.name,
+            price: d.price,
+            description: d.description,
+            count: d.count,
+            src: process.env.VUE_APP_APIURL + '/commodity/' + d.image
+          }
+        })
+      })
+      .catch(() => {
+        alert('發生錯誤')
+      })
+  }
+}
+</script>
