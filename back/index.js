@@ -405,6 +405,35 @@ app.delete('/commodity/:id', async (req, res) => {
   }
 })
 
+// 商品檔案-找檔案資料(前台)
+app.get('/commodity', async (req, res) => {
+  try {
+    const result = await db.commodity.find()
+    res.status(200)
+    res.send({ success: true, message: '', result })
+  } catch (error) {
+    res.status(500)
+    res.send({ success: false, message: '伺服器錯誤' })
+  }
+})
+
+// 商品檔案-給檔案(前台)
+app.get('/commodity/:image', async (req, res) => {
+  if (process.env.FTP === 'false') {
+    const path = process.cwd() + '/images/' + req.params.image
+    const exists = fs.existsSync(path)
+    if (exists) {
+      res.status(200)
+      res.sendFile(path)
+    } else {
+      res.status(404)
+      res.send({ success: false, message: '找不到圖片' })
+    }
+  } else {
+    res.redirect('http://' + process.env.FTP_HOST + '/' + process.env.FTP_USER + '/' + req.params.image)
+  }
+})
+
 // 輪播圖上傳(管理員後台)
 app.post('/carousel', async (req, res) => {
   // multipart 有包含檔案
