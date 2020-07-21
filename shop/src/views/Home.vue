@@ -31,10 +31,18 @@
     object-position: center;
   }
   #homefooter {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
   text-align: center;
   color: black;
   font-size: 2rem;
   font-family: '微軟正黑體';
+}
+@media (max-width: 576px) {
+  #homefooter {
+    font-size:1rem;
+  }
 }
 </style>
 <script>

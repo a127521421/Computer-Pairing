@@ -1,7 +1,7 @@
 <template>
   <div class="user">
-    <b-container class="text-center">
-      <h1>會員中心</h1>
+    <b-container>
+      <h1 class="text-center">會員中心</h1>
       <b-row>
         <b-col cols="6">
           <div id="card1">
@@ -41,6 +41,9 @@
 
 <style>
   #userfooter {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
   text-align: center;
   color: black;
   font-size: 2rem;
@@ -49,5 +52,10 @@
   bottom: 0;
   left:50%;
   transform: translate(-50%);
+}
+@media (max-width: 576px) {
+  #userfooter {
+    font-size:1rem;
+  }
 }
 </style>

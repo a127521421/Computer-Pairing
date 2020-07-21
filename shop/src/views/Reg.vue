@@ -41,6 +41,9 @@
     margin: 0;
   }
   #regfooter {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
   text-align: center;
   color: black;
   font-size: 2rem;
@@ -49,6 +52,11 @@
   bottom: 0;
   left:50%;
   transform: translate(-50%);
+}
+@media (max-width: 576px) {
+  #regfooter {
+    font-size:1rem;
+  }
 }
 </style>
 
