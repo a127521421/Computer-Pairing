@@ -16,17 +16,11 @@
           </b-card>
         </b-col>
       </b-row>
-      <footer id="shoopfooter">
-        <span>Computer pairing 版權所有 © All Rights Reserved.</span>
-      </footer>
     </b-container>
   </div>
 </template>
 
 <style>
-#shopping{
-  min-height: 100%;
-}
 .row {
   justify-content:center;
 }
@@ -35,24 +29,6 @@
 }
 .card{
   margin-bottom: 2rem;
-}
-#shoopfooter {
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  text-align: center;
-  color: black;
-  font-size: 2rem;
-  font-family: '微軟正黑體';
-  position: relative;
-  bottom: 0;
-  left:50%;
-  transform: translate(-50%);
-}
-@media (max-width: 576px) {
-  #shoopfooter {
-    font-size:1rem;
-  }
 }
 </style>
 

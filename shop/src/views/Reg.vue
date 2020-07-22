@@ -30,35 +30,8 @@
         </b-col>
       </b-row>
     </b-container>
-    <footer id="regfooter">
-      <span>Computer pairing 版權所有 © All Rights Reserved.</span>
-    </footer>
   </div>
 </template>
-
-<style>
-  .row {
-    margin: 0;
-  }
-  #regfooter {
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  text-align: center;
-  color: black;
-  font-size: 2rem;
-  font-family: '微軟正黑體';
-  position: absolute;
-  bottom: 0;
-  left:50%;
-  transform: translate(-50%);
-}
-@media (max-width: 576px) {
-  #regfooter {
-    font-size:1rem;
-  }
-}
-</style>
 
 <script>
 export default {
