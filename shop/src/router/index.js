@@ -68,6 +68,24 @@ const routes = [
       login: true,
       title: 'CP | 管理員'
     }
+  },
+  {
+    path: '/managecarousels',
+    name: 'ManageCarousels',
+    component: () => import(/* webpackChunkName: "managecarousels" */ '../views/ManageCarousels.vue'),
+    meta: {
+      login: true,
+      title: 'CP | 管理輪播圖'
+    }
+  },
+  {
+    path: '/managegoods',
+    name: 'ManageGoods',
+    component: () => import(/* webpackChunkName: "managegoods" */ '../views/ManageGoods.vue'),
+    meta: {
+      login: true,
+      title: 'CP | 管理商品'
+    }
   }
 ]
 

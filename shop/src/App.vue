@@ -70,7 +70,7 @@ h1,h3{
   font-size: 2rem;
   font-family: '微軟正黑體';
 }
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   #homefooter {
     font-size:1rem;
   }

@@ -9,7 +9,7 @@
             <b><i ></i>輪播圖</b>
           </h3>
           <div class="card">
-            <b-link to='/'>輪播圖</b-link>
+            <b-link to='/managecarousels'>輪播圖</b-link>
               <ul>
                 <li>管理輪播圖
                 </li>
@@ -23,7 +23,7 @@
             <b><i ></i>商品資料</b>
           </h3>
           <div class="card">
-            <b-link to='/changepassword'>商品資料</b-link>
+            <b-link to='/managegoods'>商品資料</b-link>
             <ul>
               <li>管理商品資料
               </li>

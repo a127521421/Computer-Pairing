@@ -3,7 +3,7 @@
     <b-container>
       <h1 class="text-center">會員中心</h1>
       <b-row>
-        <b-col cols="6">
+        <b-col cols="12" md="6">
           <div id="card1">
             <h3>
               <b><i ></i>願望清單</b>
@@ -17,7 +17,7 @@
             </div>
           </div>
         </b-col>
-        <b-col cols="6">
+        <b-col cols="12" md="6">
           <div id="card2">
             <h3>
               <b><i ></i>修改密碼</b>
