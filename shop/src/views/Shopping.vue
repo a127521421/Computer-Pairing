@@ -44,9 +44,15 @@ export default {
       .then(response => {
         this.commoditys = response.data.result.map(d => {
           return {
+            _id: d._id,
             name: d.name,
             price: d.price,
-            description: d.description,
+            Screen: d.Screen,
+            WorkingSystem: d.WorkingSystem,
+            CPU: d.CPU,
+            DRAM: d.DRAM,
+            HDD: d.HDD,
+            GPU: d.GPU,
             count: d.count,
             src: process.env.VUE_APP_APIURL + '/commodity/' + d.image
           }
