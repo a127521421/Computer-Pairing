@@ -321,7 +321,12 @@ app.post('/commodity', async (req, res) => {
           {
             name: req.body.name,
             price: req.body.price,
-            description: req.body.description,
+            Screen: req.body.Screen,
+            WorkingSystem: req.body.WorkingSystem,
+            CPU: req.body.CPU,
+            DRAM: req.body.DRAM,
+            HDD: req.body.HDD,
+            GPU: req.body.GPU,
             count: req.body.count,
             image
           }

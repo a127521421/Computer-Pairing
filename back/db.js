@@ -72,10 +72,40 @@ const commoditySchema = new Schema({
     required: [true, '商品價格必填']
   },
   // 商品說明
-  description: {
+  // 螢幕
+  Screen: {
     type: String,
-    minlength: [2, '商品說明至少兩個字'],
-    required: [true, '商品說明必填']
+    minlength: [2, '螢幕至少兩個字']
+  },
+  // 作業系統
+  WorkingSystem: {
+    type: String,
+    minlength: [2, '作業系統至少兩個字'],
+    required: [true, '作業系統必填']
+  },
+  // CPU
+  CPU: {
+    type: String,
+    minlength: [2, 'CPU至少兩個字'],
+    required: [true, 'CPU必填']
+  },
+  // DRAM
+  DRAM: {
+    type: String,
+    minlength: [2, 'DRAM至少兩個字'],
+    required: [true, 'DRAM必填']
+  },
+  // HDD
+  HDD: {
+    type: String,
+    minlength: [2, 'HDD至少兩個字'],
+    required: [true, 'HDD必填']
+  },
+  // GPU
+  GPU: {
+    type: String,
+    minlength: [2, 'GPU至少兩個字'],
+    required: [true, 'GPU必填']
   },
   // 庫存
   count: {
