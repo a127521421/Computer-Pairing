@@ -45,25 +45,37 @@
             class="mb-2">
             <b-card-text>
               <h3>型號</h3>
-              <p>{{commodity.name}}</p>
+              <p v-if="!commodity.edit">{{commodity.name}}</p>
+              <b-form-textarea v-else></b-form-textarea>
               <h3>價格</h3>
-              <p>{{commodity.price}}</p>
+              <p v-if="!commodity.edit">{{commodity.price}}</p>
+              <b-form-textarea v-else></b-form-textarea>
               <h3>螢幕</h3>
-              <p>{{commodity.Screen}}</p>
+              <p v-if="!commodity.edit">{{commodity.Screen}}</p>
+              <b-form-textarea v-else></b-form-textarea>
               <h3>作業系統</h3>
-              <p>{{commodity.WorkingSystem}}</p>
+              <p v-if="!commodity.edit">{{commodity.WorkingSystem}}</p>
+              <b-form-textarea v-else></b-form-textarea>
               <h3>CPU</h3>
-              <p>{{commodity.CPU}}</p>
+              <p v-if="!commodity.edit">{{commodity.CPU}}</p>
+              <b-form-textarea v-else></b-form-textarea>
               <h3>DRAM</h3>
-              <p>{{commodity.DRAM}}</p>
+              <p v-if="!commodity.edit">{{commodity.DRAM}}</p>
+              <b-form-textarea v-else></b-form-textarea>
               <h3>HDD</h3>
-              <p>{{commodity.HDD}}</p>
+              <p v-if="!commodity.edit">{{commodity.HDD}}</p>
+              <b-form-textarea v-else></b-form-textarea>
               <h3>GPU</h3>
-              <p>{{commodity.GPU}}</p>
+              <p v-if="!commodity.edit">{{commodity.GPU}}</p>
+              <b-form-textarea v-else></b-form-textarea>
               <h3>庫存</h3>
-              <p>{{commodity.count}}</p>
+              <p v-if="!commodity.edit">{{commodity.count}}</p>
+              <b-form-textarea v-else></b-form-textarea>
             </b-card-text>
-            <b-button variant="danger" @click="del(commodity, idx)" id="cbuttond">刪除</b-button>
+            <b-button v-if="commodity.edit" variant="danger" @click="cancel(commodity)" id="cbuttond">取消</b-button>
+            <b-button v-else variant="success" @click="edit(commodity)" id="cbuttond">編輯</b-button>
+            <b-button  v-if="commodity.edit" variant="success" @click="update(commodity)" id="cbuttond">更新</b-button>
+            <b-button v-else variant="danger" @click="del(commodity, idx)" id="cbuttond">刪除</b-button>
           </b-card>
         </b-col>
       </b-row>
@@ -151,7 +163,8 @@ export default {
               HDD: this.HDD,
               GPU: this.GPU,
               count: this.count,
-              src: process.env.VUE_APP_APIURL + '/commodity/' + response.data.image
+              src: process.env.VUE_APP_APIURL + '/commodity/' + response.data.image,
+              edit: false
             }
           )
           this.file = null
@@ -169,10 +182,16 @@ export default {
         })
       }
     },
-    del (carousel, idx) {
-      this.axios.delete(process.env.VUE_APP_APIURL + '/carousel/' + carousel._id)
+    edit (commodity) {
+      commodity.edit = true
+    },
+    cancel (commodity) {
+      commodity.edit = false
+    },
+    del (commodity, idx) {
+      this.axios.delete(process.env.VUE_APP_APIURL + '/commodity/' + commodity._id)
         .then(response => {
-          this.carousels.splice(idx, 1)
+          this.commoditys.splice(idx, 1)
         })
         .catch(() => {
           alert('發生錯誤')
@@ -194,7 +213,8 @@ export default {
             HDD: d.HDD,
             GPU: d.GPU,
             count: d.count,
-            src: process.env.VUE_APP_APIURL + '/commodity/' + d.image
+            src: process.env.VUE_APP_APIURL + '/commodity/' + d.image,
+            edit: false
           }
         })
       })
