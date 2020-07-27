@@ -410,10 +410,22 @@ app.delete('/commodity/:id', async (req, res) => {
   }
 })
 
-// 商品檔案-找檔案資料(前台)
+// 商品檔案-找檔案資料(前台-目錄)
 app.get('/commodity', async (req, res) => {
   try {
     const result = await db.commodity.find()
+    res.status(200)
+    res.send({ success: true, message: '', result })
+  } catch (error) {
+    res.status(500)
+    res.send({ success: false, message: '伺服器錯誤' })
+  }
+})
+
+// 商品檔案-找檔案資料(前台-商品)
+app.get('/good/:id', async (req, res) => {
+  try {
+    const result = await db.commodity.findById(req.params.id)
     res.status(200)
     res.send({ success: true, message: '', result })
   } catch (error) {
