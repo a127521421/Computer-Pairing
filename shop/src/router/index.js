@@ -86,6 +86,15 @@ const routes = [
       login: true,
       title: 'CP | 管理商品'
     }
+  },
+  {
+    path: '/commodity/:id',
+    name: 'Commodity',
+    component: () => import(/* webpackChunkName: "commodity" */ '../views/Commodity.vue'),
+    meta: {
+      login: true,
+      title: 'CP | 商品'
+    }
   }
 ]
 

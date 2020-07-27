@@ -9,9 +9,11 @@
             img-alt="Image"
             img-top
             style="max-width:300px;max-height:500px"
+            @click="jump(commodity._id)"
           >
             <b-card-text>
-              {{commodity.name}}
+              <h3>型號</h3><p>{{commodity.name}}</p>
+              <h3>價格</h3><p>{{commodity.price}}</p>
             </b-card-text>
           </b-card>
         </b-col>
@@ -27,8 +29,14 @@
 .d-flex{
   justify-content:center;
 }
-.card{
+#shopping .card{
   margin-bottom: 2rem;
+  transition: 0.3s;
+  border: 5px solid #eeeeee !important;
+  box-shadow: 0 0 0 1px #c7c7c7;
+}
+#shopping .card:hover {
+  transform: translateY(-1rem);
 }
 </style>
 
@@ -37,6 +45,11 @@ export default {
   data () {
     return {
       commoditys: []
+    }
+  },
+  methods: {
+    jump (id) {
+      this.$router.push('/commodity/' + id)
     }
   },
   mounted () {

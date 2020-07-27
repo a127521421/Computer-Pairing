@@ -35,14 +35,13 @@
       </b-form>
     </b-container>
     <!-- 顯示 -->
-    <b-container>
-      <b-row>
-        <b-col v-for="(commodity, idx) in commoditys" :key="idx" cols="12" md="6" lg="3" class="text-center">
-          <b-card
-            :img-src="commodity.src"
-            img-top
-            tag="article"
-            class="mb-2">
+    <b-container v-for="(commodity, idx) in commoditys" :key="idx" class="text-center">
+      <b-card class="mb-2 overflow-hidden">
+        <b-row no-gutters>
+          <b-col md="6">
+            <b-card-img :src="commodity.src" class="rounded-0" style="transform:translateY(50%)"></b-card-img>
+          </b-col>
+          <b-col md="6">
             <b-card-text>
               <h3>型號</h3>
               <p v-if="!commodity.edit">{{commodity.name}}</p>
@@ -76,9 +75,9 @@
             <b-button v-else variant="success" @click="edit(commodity)" id="cbuttond">編輯</b-button>
             <b-button v-if="commodity.edit" variant="danger" @click="cancel(commodity)" id="cbuttond">取消</b-button>
             <b-button v-else variant="danger" @click="del(commodity, idx)" id="cbuttond">刪除</b-button>
-          </b-card>
-        </b-col>
-      </b-row>
+          </b-col>
+        </b-row>
+      </b-card>
     </b-container>
   </div>
 </template>
@@ -87,14 +86,8 @@
   .breadcrumb{
     background-color:transparent;
   }
-  #cbuttond{
-    margin-bottom: 1.5rem;
-  }
-  #mcimg{
-  margin-bottom: 2rem;
-  height: 250px !important;
-  object-fit: cover;
-  object-position: center center;
+  #cbutton{
+    margin: 1.5rem 0;
   }
 </style>
 
