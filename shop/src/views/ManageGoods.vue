@@ -46,35 +46,35 @@
             <b-card-text>
               <h3>型號</h3>
               <p v-if="!commodity.edit">{{commodity.name}}</p>
-              <b-form-textarea v-else></b-form-textarea>
+              <b-form-textarea v-else v-model="name"></b-form-textarea>
               <h3>價格</h3>
               <p v-if="!commodity.edit">{{commodity.price}}</p>
-              <b-form-textarea v-else></b-form-textarea>
+              <b-form-textarea v-else v-model="price"></b-form-textarea>
               <h3>螢幕</h3>
               <p v-if="!commodity.edit">{{commodity.Screen}}</p>
-              <b-form-textarea v-else></b-form-textarea>
+              <b-form-textarea v-else v-model="Screen"></b-form-textarea>
               <h3>作業系統</h3>
               <p v-if="!commodity.edit">{{commodity.WorkingSystem}}</p>
-              <b-form-textarea v-else></b-form-textarea>
+              <b-form-textarea v-else v-model="WorkingSystem"></b-form-textarea>
               <h3>CPU</h3>
               <p v-if="!commodity.edit">{{commodity.CPU}}</p>
-              <b-form-textarea v-else></b-form-textarea>
+              <b-form-textarea v-else v-model="CPU"></b-form-textarea>
               <h3>DRAM</h3>
               <p v-if="!commodity.edit">{{commodity.DRAM}}</p>
-              <b-form-textarea v-else></b-form-textarea>
+              <b-form-textarea v-else v-model="DRAM"></b-form-textarea>
               <h3>HDD</h3>
               <p v-if="!commodity.edit">{{commodity.HDD}}</p>
-              <b-form-textarea v-else></b-form-textarea>
+              <b-form-textarea v-else v-model="HDD"></b-form-textarea>
               <h3>GPU</h3>
               <p v-if="!commodity.edit">{{commodity.GPU}}</p>
-              <b-form-textarea v-else></b-form-textarea>
+              <b-form-textarea v-else v-model="GPU"></b-form-textarea>
               <h3>庫存</h3>
               <p v-if="!commodity.edit">{{commodity.count}}</p>
-              <b-form-textarea v-else></b-form-textarea>
+              <b-form-textarea v-else v-model="count"></b-form-textarea>
             </b-card-text>
-            <b-button v-if="commodity.edit" variant="danger" @click="cancel(commodity)" id="cbuttond">取消</b-button>
-            <b-button v-else variant="success" @click="edit(commodity)" id="cbuttond">編輯</b-button>
             <b-button  v-if="commodity.edit" variant="success" @click="update(commodity)" id="cbuttond">更新</b-button>
+            <b-button v-else variant="success" @click="edit(commodity)" id="cbuttond">編輯</b-button>
+            <b-button v-if="commodity.edit" variant="danger" @click="cancel(commodity)" id="cbuttond">取消</b-button>
             <b-button v-else variant="danger" @click="del(commodity, idx)" id="cbuttond">刪除</b-button>
           </b-card>
         </b-col>
@@ -184,9 +184,54 @@ export default {
     },
     edit (commodity) {
       commodity.edit = true
+      this.name = commodity.name
+      this.price = commodity.price
+      this.Screen = commodity.Screen
+      this.WorkingSystem = commodity.WorkingSystem
+      this.CPU = commodity.CPU
+      this.DRAM = commodity.DRAM
+      this.HDD = commodity.HDD
+      this.GPU = commodity.GPU
+      this.count = commodity.count
     },
     cancel (commodity) {
       commodity.edit = false
+      this.name = ''
+      this.price = ''
+      this.Screen = ''
+      this.WorkingSystem = ''
+      this.CPU = ''
+      this.DRAM = ''
+      this.HDD = ''
+      this.GPU = ''
+      this.count = ''
+    },
+    update (commodity) {
+      this.axios.patch(process.env.VUE_APP_APIURL + '/commodity/' + commodity._id, { name: this.name, price: this.price, Screen: this.Screen, WorkingSystem: this.WorkingSystem, CPU: this.CPU, DRAM: this.DRAM, HDD: this.HDD, GPU: this.GPU, count: this.count })
+        .then(response => {
+          commodity.edit = false
+          commodity.name = this.name
+          commodity.price = this.price
+          commodity.Screen = this.Screen
+          commodity.WorkingSystem = this.WorkingSystem
+          commodity.CPU = this.CPU
+          commodity.DRAM = this.DRAM
+          commodity.HDD = this.HDD
+          commodity.GPU = this.GPU
+          commodity.count = this.count
+          this.name = ''
+          this.price = ''
+          this.Screen = ''
+          this.WorkingSystem = ''
+          this.CPU = ''
+          this.DRAM = ''
+          this.HDD = ''
+          this.GPU = ''
+          this.count = ''
+        })
+        .catch(() => {
+          alert('發生錯誤')
+        })
     },
     del (commodity, idx) {
       this.axios.delete(process.env.VUE_APP_APIURL + '/commodity/' + commodity._id)
