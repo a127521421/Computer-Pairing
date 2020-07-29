@@ -88,9 +88,9 @@ const routes = [
     }
   },
   {
-    path: '/commodity/:id',
-    name: 'Commodity',
-    component: () => import(/* webpackChunkName: "commodity" */ '../views/Commodity.vue'),
+    path: '/goods/:id',
+    name: 'Goods',
+    component: () => import(/* webpackChunkName: "goods" */ '../views/Goods.vue'),
     meta: {
       login: true,
       title: 'CP | 商品'

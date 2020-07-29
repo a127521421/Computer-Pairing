@@ -20,14 +20,7 @@
     </b-carousel>
   </div>
 </template>
-<style>
-  #carousel-1 img{
-    width:100%;
-    height:100vh;
-    object-fit: cover;
-    object-position: center;
-  }
-</style>
+
 <script>
 export default {
   data () {

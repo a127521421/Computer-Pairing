@@ -23,7 +23,7 @@
           @input="File"
         >
         </b-form-file>
-        <b-button type="submit" variant="primary" id="cbutton">上傳</b-button>
+        <b-button type="submit" variant="primary" id="button">上傳</b-button>
       </b-form>
     </b-container>
     <!-- 顯示 -->
@@ -31,30 +31,12 @@
       <b-row>
         <b-col v-for="(carousel, idx) in carousels" :key="idx" cols="12" md="6" lg="3" class="text-center">
           <b-img id="mcimg" :src="carousel.src" thumbnail fluid></b-img>
-          <b-button variant="danger" @click="del(carousel, idx)" id="cbuttond">刪除</b-button>
+          <b-button variant="danger" @click="del(carousel, idx)" id="button">刪除</b-button>
         </b-col>
       </b-row>
     </b-container>
   </div>
 </template>
-
-<style>
-  .breadcrumb{
-    background-color:transparent;
-  }
-  #cbutton{
-    margin: 1.5rem 0;
-  }
-  #cbuttond{
-    margin-bottom: 1.5rem;
-  }
-  #mcimg{
-  margin-bottom: 2rem;
-  height: 250px !important;
-  object-fit: cover;
-  object-position: center center;
-  }
-</style>
 
 <script>
 export default {

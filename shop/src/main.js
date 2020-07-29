@@ -13,6 +13,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faSignInAlt, faSignOutAlt, faRegistered, faHouseUser, faDesktop } from '@fortawesome/free-solid-svg-icons'
 
+import './style/style.styl'
+
 library.add(faSignInAlt, faSignOutAlt, faRegistered, faHouseUser, faDesktop)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

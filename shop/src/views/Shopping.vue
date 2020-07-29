@@ -1,9 +1,9 @@
 <template>
   <div id="shopping">
-    <b-container class="text-center">
-      <h1>商品目錄</h1>
-      <b-row>
-        <b-col v-for="(commodity, idx) in commoditys" :key="idx" cols="12" md="6" lg="3" class="d-flex">
+    <b-container>
+      <h1  class="text-center">商品目錄</h1>
+      <b-row id="shoppingrow">
+        <b-col v-for="(commodity, idx) in commoditys" :key="idx" cols="12" md="6" lg="3" class="d-flex justify-content-center">
           <b-card
             :img-src="commodity.src"
             img-alt="Image"
@@ -12,8 +12,8 @@
             @click="jump(commodity._id)"
           >
             <b-card-text>
-              <h3>型號</h3><p>{{commodity.name}}</p>
-              <h3>價格</h3><p>{{commodity.price}}</p>
+              <p>{{commodity.name}}</p>
+              <p style="color:red">NT.{{commodity.price}}</p>
             </b-card-text>
           </b-card>
         </b-col>
@@ -21,24 +21,6 @@
     </b-container>
   </div>
 </template>
-
-<style>
-.row {
-  justify-content:center;
-}
-.d-flex{
-  justify-content:center;
-}
-#shopping .card{
-  margin-bottom: 2rem;
-  transition: 0.3s;
-  border: 5px solid #eeeeee !important;
-  box-shadow: 0 0 0 1px #c7c7c7;
-}
-#shopping .card:hover {
-  transform: translateY(-1rem);
-}
-</style>
 
 <script>
 export default {
@@ -49,7 +31,7 @@ export default {
   },
   methods: {
     jump (id) {
-      this.$router.push('/commodity/' + id)
+      this.$router.push('/goods/' + id)
     }
   },
   mounted () {

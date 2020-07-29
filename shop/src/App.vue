@@ -37,45 +37,11 @@
       </b-container>
     </b-navbar>
     <router-view class="page" />
-    <footer id="homefooter">
+    <footer id="footer">
       <span>Computer pairing 版權所有 © All Rights Reserved.</span>
     </footer>
   </div>
 </template>
-
-<style>
-html, body{
-  height: 100%;
-}
-.page {
-  /* 100vh - nav 高 - footer 高 = 內容最小高 */
-  min-height: calc(100vh - 59px - 48px);
-}
-#app{
-  min-height: 100vh;
-  background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%);
-}
-#icon {
-  font-size: 1.5rem;
-}
-h1,h3{
-    font-family: '微軟正黑體';
-  }
-#homefooter {
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  text-align: center;
-  color: black;
-  font-size: 2rem;
-  font-family: '微軟正黑體';
-}
-@media (max-width: 768px) {
-  #homefooter {
-    font-size:1rem;
-  }
-}
-</style>
 
 <script>
 export default {

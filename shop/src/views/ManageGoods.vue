@@ -31,7 +31,7 @@
         <b-form-textarea v-model="HDD" placeholder="HDD"></b-form-textarea>
         <b-form-textarea v-model="GPU" placeholder="GPU"></b-form-textarea>
         <b-form-textarea v-model="count" placeholder="庫存"></b-form-textarea>
-        <b-button type="submit" variant="primary" id="cbutton">上傳</b-button>
+        <b-button type="submit" variant="primary" id="button">上傳</b-button>
       </b-form>
     </b-container>
     <!-- 顯示 -->
@@ -71,25 +71,16 @@
               <p v-if="!commodity.edit">{{commodity.count}}</p>
               <b-form-textarea v-else v-model="count"></b-form-textarea>
             </b-card-text>
-            <b-button  v-if="commodity.edit" variant="success" @click="update(commodity)" id="cbuttond">更新</b-button>
-            <b-button v-else variant="success" @click="edit(commodity)" id="cbuttond">編輯</b-button>
-            <b-button v-if="commodity.edit" variant="danger" @click="cancel(commodity)" id="cbuttond">取消</b-button>
-            <b-button v-else variant="danger" @click="del(commodity, idx)" id="cbuttond">刪除</b-button>
+            <b-button  v-if="commodity.edit" variant="success" @click="update(commodity)" id="button">更新</b-button>
+            <b-button v-else variant="success" @click="edit(commodity)" id="button">編輯</b-button>
+            <b-button v-if="commodity.edit" variant="danger" @click="cancel(commodity)" id="button">取消</b-button>
+            <b-button v-else variant="danger" @click="del(commodity, idx)" id="button">刪除</b-button>
           </b-col>
         </b-row>
       </b-card>
     </b-container>
   </div>
 </template>
-
-<style>
-  .breadcrumb{
-    background-color:transparent;
-  }
-  #cbutton{
-    margin: 1.5rem 0;
-  }
-</style>
 
 <script>
 export default {
