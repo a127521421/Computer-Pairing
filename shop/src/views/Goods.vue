@@ -10,9 +10,15 @@
             <h3>{{goods.name}}</h3>
             <br>
             <h4 style="color:red">NT.{{goods.price}}</h4>
+            <b-button id="button" variant="danger" v-if="click" @click=" click = !click">移除願望清單</b-button>
+            <b-button id="button" variant="light" v-else @click=" click = !click">加到願望清單</b-button>
             <br>
-            <b-button variant="danger" v-if="click" @click=" click = !click">移除願望清單</b-button>
-            <b-button variant="light" v-else @click=" click = !click">加到願望清單</b-button>
+            <p id="text13px">螢幕 : {{goods.Screen}}</p>
+            <p id="text13px">作業系統 : {{goods.WorkingSystem}}</p>
+            <p id="text13px">CPU : {{goods.CPU}}</p>
+            <p id="text13px">DRAM : {{goods.DRAM}}</p>
+            <p id="text13px">HDD : {{goods.HDD}}</p>
+            <p id="text13px">GPU : {{goods.GPU}}</p>
           </b-card-text>
         </b-col>
       </b-row>
