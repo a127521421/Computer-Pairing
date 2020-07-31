@@ -36,21 +36,6 @@ const userSchema = new Schema({
     type: String,
     required: [true, '請輸入密碼']
   }
-  // 電子郵件
-  // email: {
-  //   type: String,
-  //   require: [true, '信箱必填'],
-  //   // 自訂驗證規則
-  //   validata: {
-  //     // 驗證 function
-  //     validata (value) {
-  //       // 使用驗證套件檢查是不是 email
-  //       return validator.isEmail(value)
-  //     },
-  //     // 錯誤訊息
-  //     message: '信箱格式錯誤'
-  //   }
-  // }
 }, {
   // 不要紀錄資料修改次數
   versionKey: false
@@ -130,14 +115,30 @@ const CarouselSchema = new Schema({
   }
 })
 
+// 願望清單
+const CarouselWishlist = new Schema({
+  user: {
+    type: String,
+    required: [true, '沒有使用者名稱']
+  },
+  wishlist: {
+    type: String,
+    required: [true, '沒有願望清單']
+  }
+}, {
+  versionKey: false
+})
+
 const users = mongoose.model(process.env.COLLECTION_USER, userSchema)
 const commodity = mongoose.model(process.env.COLLECTION_COMMODITY, commoditySchema)
 const carousel = mongoose.model(process.env.COLLECTION_CAROUSEL, CarouselSchema)
+const wishlist = mongoose.model(process.env.COLLECTION_WISHLIST, CarouselWishlist)
 const connection = mongoose.connection
 
 export default {
   users,
   commodity,
   carousel,
+  wishlist,
   connection
 }

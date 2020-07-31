@@ -151,7 +151,6 @@ app.post('/users', async (req, res) => {
     await db.users.create({
       account: req.body.account,
       password: md5(req.body.password)
-      // email: req.body.email
     })
     res.status(200)
     res.send({ success: true, message: '註冊成功' })
@@ -242,6 +241,8 @@ app.patch('/usersupdate/:id', async (req, res) => {
   }
   try {
     // 尋找後修改
+    // findByIdAndUpdate 預設回傳的是更新前的資料
+    // 設定 new true 後會變成回傳新的資料
     await db.users.findByIdAndUpdate(req.params.id, { password: md5(req.body.password) }, { new: true })
     res.status(200)
     res.send({ success: true, message: '密碼修改成功' })
@@ -257,8 +258,6 @@ app.patch('/usersupdate/:id', async (req, res) => {
 app.delete('/usersupdate/:id', async (req, res) => {
   try {
     let result = ''
-    // findByIdAndUpdate 預設回傳的是更新前的資料
-    // 設定 new true 後會變成回傳新的資料
     result = await db.users.findByIdAndDelete(req.params.id)
     if (result === null) {
       res.status(404)
@@ -387,8 +386,6 @@ app.patch('/commodity/:id', async (req, res) => {
 app.delete('/commodity/:id', async (req, res) => {
   try {
     let result = ''
-    // findByIdAndUpdate 預設回傳的是更新前的資料
-    // 設定 new true 後會變成回傳新的資料
     result = await db.commodity.findByIdAndDelete(req.params.id)
     if (result === null) {
       res.status(404)
@@ -448,6 +445,81 @@ app.get('/commodity/:image', async (req, res) => {
     }
   } else {
     res.redirect('http://' + process.env.FTP_HOST + '/' + process.env.FTP_USER + '/' + req.params.image)
+  }
+})
+
+// 願望清單
+app.post('/wishlist', async (req, res) => {
+  // 判斷是否為json格式
+  if (!req.headers['content-type'].includes('application/json')) {
+    res.status(400)
+    res.send({ success: false, message: '格式不符' })
+    return
+  }
+
+  try {
+    // 新增資料
+    const result = await db.wishlist.create({
+      user: req.session.user,
+      wishlist: req.body.wishlist
+    })
+    res.status(200)
+    res.send({ success: true, message: '以加入願望清單', _id: result._id })
+  } catch (error) {
+    if (error.name === 'ValidationError') {
+      // 資料格式錯誤
+      const key = Object.keys(error.errors)[0]
+      const message = error.errors[key].message
+      res.status(400)
+      res.send({ success: false, message })
+    } else {
+      // 伺服器錯誤
+      res.status(500)
+      res.send({ success: false, message: '伺服器錯誤' })
+    }
+  }
+})
+
+// 移除願望清單
+app.delete('/wishlist/:id', async (req, res) => {
+  try {
+    let result = ''
+    result = await db.wishlist.findByIdAndDelete(req.params.id)
+    if (result === null) {
+      res.status(404)
+      res.send({ success: true, message: '找不到資料' })
+    } else {
+      res.status(200)
+      res.send({ success: true, message: '刪除成功' })
+    }
+  } catch (error) {
+    if (error.name === 'CastError') {
+      // ID 格式不是 MongoDB 的格式
+      res.status(400)
+      res.send({ success: false, message: 'ID 格式錯誤' })
+    } else {
+      // 伺服器錯誤
+      res.status(500)
+      res.send({ success: false, message: '伺服器錯誤' })
+    }
+  }
+})
+
+// 找願望清單資料(會員後台-目錄)
+
+// 找願望清單資料(單獨)
+app.post('/wishlist/:user', async (req, res) => {
+  try {
+    const result = await db.wishlist.find({ user: req.params.user, wishlist: req.body.wishlist })
+    if (result.length > 0) {
+      res.status(200)
+      res.send({ success: true, message: '', result })
+    } else {
+      res.send({ success: false })
+    }
+  } catch (error) {
+    res.status(500)
+    res.send({ success: false, message: '伺服器錯誤' })
   }
 })
 
@@ -545,8 +617,6 @@ app.get('/carousel/:image', async (req, res) => {
 app.delete('/carousel/:id', async (req, res) => {
   try {
     let result = ''
-    // findByIdAndUpdate 預設回傳的是更新前的資料
-    // 設定 new true 後會變成回傳新的資料
     result = await db.carousel.findByIdAndDelete(req.params.id)
     if (result === null) {
       res.status(404)
