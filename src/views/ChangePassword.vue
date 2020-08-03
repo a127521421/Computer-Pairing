@@ -10,7 +10,7 @@
                 <b-form-input type="password" v-model="password"></b-form-input>
             </div>
             <br>
-            <b-button type="submit" variant="primary" @click="update(user)">更新</b-button>
+            <b-button type="submit" variant="primary" @click="update()">更新</b-button>
           </b-form>
         </b-col>
       </b-row>
@@ -32,8 +32,8 @@ export default {
     }
   },
   methods: {
-    update (user) {
-      this.axios.patch(process.env.VUE_APP_APIURL + '/usersupdate/' + user._id, { password: this.password })
+    update () {
+      this.axios.patch(process.env.VUE_APP_APIURL + '/usersupdate/' + this.user._id, { password: this.password })
         .then(response => {
           const data = response.data
           if (data.success) {
