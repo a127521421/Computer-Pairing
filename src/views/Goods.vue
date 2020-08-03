@@ -48,7 +48,7 @@ export default {
   methods: {
     add () {
       this.axios.post(process.env.VUE_APP_APIURL + '/wishlist',
-        { user: this.user.account, wishlist: this.goods._id }
+        { wishlist: this.goods._id }
       )
         .then(response => {
           const data = response.data
