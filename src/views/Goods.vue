@@ -31,7 +31,9 @@ export default {
   data () {
     return {
       wishlist: '',
-      goods: {},
+      goods: {
+        image: 'undefined'
+      },
       click: false
     }
   },
