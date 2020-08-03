@@ -227,11 +227,11 @@ app.delete('/logout', async (req, res) => {
 // 修改密碼(會員後台)
 app.patch('/usersupdate/:id', async (req, res) => {
   // 檢查是否有登錄
-  if (req.session.user === undefined) {
-    res.status(401)
-    res.send({ success: false, message: '未登入' })
-    return
-  }
+  // if (req.session.user === undefined) {
+  //   res.status(401)
+  //   res.send({ success: false, message: '未登入' })
+  //   return
+  // }
   // 拒絕不是 json 的資料格式
   if (!req.headers['content-type'].includes('application/json')) {
     // 回傳錯誤狀態碼
