@@ -460,7 +460,7 @@ app.post('/wishlist', async (req, res) => {
   try {
     // 新增資料
     const result = await db.wishlist.create({
-      user: req.body.user,
+      user: req.session.user,
       wishlist: req.body.wishlist
     })
     res.status(200)
