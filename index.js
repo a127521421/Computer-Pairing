@@ -87,7 +87,7 @@ app.use(session({
 // 檔案上傳設定(位置)
 // 需注意上傳到哪裡
 let storage
-if (process.env.FTP === true) {
+if (process.env.FTP === 'true') {
   // heroku 將上傳檔案放伺服器
   storage = new FTPStorage({
     // 上傳伺服器的根目錄
