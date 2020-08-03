@@ -90,8 +90,8 @@ let storage
 if (process.env.FTP === true) {
   // heroku 將上傳檔案放伺服器
   storage = new FTPStorage({
-    // 上傳伺服器的根目錄
-    basepath: '/',
+    // 上傳伺服器的ComputerPairing目錄
+    basepath: '/ComputerPairing',
     // FTP 設定
     ftp: {
       host: process.env.FTP_HOST,
