@@ -61,6 +61,15 @@ const routes = [
     }
   },
   {
+    path: '/wishlist',
+    name: 'Wishlist',
+    component: () => import(/* webpackChunkName: "wishlist" */ '../views/Wishlist.vue'),
+    meta: {
+      login: true,
+      title: 'CP | 會員中心-願望清單'
+    }
+  },
+  {
     path: '/administrator',
     name: 'Administrator',
     component: () => import(/* webpackChunkName: "administrator" */ '../views/Administrator.vue'),

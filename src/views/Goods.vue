@@ -85,7 +85,7 @@ export default {
       .then(response => {
         response.data.result.image = process.env.VUE_APP_APIURL + '/commodity/' + response.data.result.image
         this.goods = response.data.result
-        this.axios.post(process.env.VUE_APP_APIURL + '/wishlist/' + this.user.account, { wishlist: this.goods._id })
+        this.axios.post(process.env.VUE_APP_APIURL + '/wishlistone/' + this.user.account, { wishlist: this.goods._id })
           .then(response => {
             const data = response.data
             if (data.success === true) {
