@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "850839f78fdecc22f5aa",
+    "revision": "7c571e260aea483ed423",
     "url": "css/app.9a237293.css"
   },
   {
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/login.gif"
   },
   {
-    "revision": "31d878e6020a09aa628ccf7319f83bf8",
+    "revision": "9bfaff272b782f2008810ff6d3ac2c9c",
     "url": "index.html"
   },
   {
@@ -24,8 +24,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/administrator.f9092b9c.js"
   },
   {
-    "revision": "850839f78fdecc22f5aa",
-    "url": "js/app.0e3b35a4.js"
+    "revision": "7c571e260aea483ed423",
+    "url": "js/app.e95c253c.js"
   },
   {
     "revision": "ec0d9487d3a44ced6428",
@@ -36,8 +36,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/chunk-vendors.fc741903.js"
   },
   {
-    "revision": "477bd46c1f5642ddf4d1",
-    "url": "js/goods.541745ca.js"
+    "revision": "af71d8b63ca24e4ec6d6",
+    "url": "js/goods.bb52cdd1.js"
   },
   {
     "revision": "87fae2edaf0df41e3b52",
@@ -60,8 +60,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/shopping.7c9da6dd.js"
   },
   {
-    "revision": "3ebc0711aeb8d6e5b157",
-    "url": "js/user.3b59f799.js"
+    "revision": "79ee12f1b065e4f3a1b2",
+    "url": "js/user.1149bc8f.js"
+  },
+  {
+    "revision": "1a92e816c7141a2c3f07",
+    "url": "js/wishlist.9aee2452.js"
   },
   {
     "revision": "7dbdabe7132fa722ace0ae954b1cc514",
