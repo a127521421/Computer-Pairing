@@ -506,9 +506,28 @@ app.delete('/wishlist/:id', async (req, res) => {
 })
 
 // 找願望清單資料(會員後台-目錄)
+app.get('/wishlist/:user', async (req, res) => {
+  try {
+    const result = await db.wishlist.find({ user: req.params.user })
+    if (result.length > 0) {
+      const result2 = []
+      for (const w of result) {
+        const result3 = await db.commodity.findById(w.wishlist)
+        result2.push(result3)
+      }
+      res.status(200)
+      res.send({ success: true, message: '', result2 })
+    } else {
+      res.send({ success: false })
+    }
+  } catch (error) {
+    res.status(500)
+    res.send({ success: false, message: '伺服器錯誤' })
+  }
+})
 
 // 找願望清單資料(單獨)
-app.post('/wishlist/:user', async (req, res) => {
+app.post('/wishlistone/:user', async (req, res) => {
   try {
     const result = await db.wishlist.find({ user: req.params.user, wishlist: req.body.wishlist })
     if (result.length > 0) {
