@@ -1,7 +1,7 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7c571e260aea483ed423",
-    "url": "css/app.9a237293.css"
+    "revision": "0b9b5b5315778a4c95d0",
+    "url": "css/app.c5745c1d.css"
   },
   {
     "revision": "23b953e9cd98331b6915",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/login.gif"
   },
   {
-    "revision": "9bfaff272b782f2008810ff6d3ac2c9c",
+    "revision": "eb8739feef5762b517ec004c5762a59a",
     "url": "index.html"
   },
   {
@@ -24,12 +24,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/administrator.f9092b9c.js"
   },
   {
-    "revision": "7c571e260aea483ed423",
-    "url": "js/app.e95c253c.js"
+    "revision": "0b9b5b5315778a4c95d0",
+    "url": "js/app.8174e576.js"
   },
   {
-    "revision": "ec0d9487d3a44ced6428",
-    "url": "js/changepassword.71ed7b4b.js"
+    "revision": "7fe1421fcfcfa0a5defd",
+    "url": "js/changepassword.e2df052a.js"
   },
   {
     "revision": "23b953e9cd98331b6915",
