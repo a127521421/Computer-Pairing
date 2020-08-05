@@ -34,8 +34,6 @@ const userSchema = new Schema({
   // 密碼
   password: {
     type: String,
-    minlength: [4, '密碼必須四個字以上，二十個字以下'],
-    maxlength: [20, '密碼必須四個字以上，二十個字以下'],
     required: [true, '請輸入密碼']
   }
 }, {
