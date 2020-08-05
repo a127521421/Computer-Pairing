@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-navbar toggleable="lg" type="dark" variant="info">
+    <b-navbar toggleable="lg" type="dark" variant="dark">
       <b-container>
         <!-- LOGO -->
         <b-navbar-brand to='/'><font-awesome-icon :icon="['fas', 'desktop']" id="icon"></font-awesome-icon>
@@ -12,7 +12,14 @@
           <b-navbar-nav class="m-auto">
             <!-- 商品目錄 -->
             <b-nav-item to="/shopping">
-              <span>商品目錄</span>
+              <p id="mr">商品目錄</p>
+            </b-nav-item>
+            <!-- 空 -->
+            <b-nav-item>
+              <p id="mr">關於我們</p>
+            </b-nav-item>
+            <b-nav-item>
+              <p id="mr">聯絡我們</p>
             </b-nav-item>
           </b-navbar-nav>
           <b-navbar-nav class="ml-auto">
