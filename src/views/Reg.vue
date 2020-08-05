@@ -80,14 +80,13 @@ export default {
             alert('註冊成功')
             // 跳到首頁
             this.$router.push('/')
-          } else {
-            // 不是就顯示回來的 message
-            alert(data.message)
           }
         })
         .catch(error => {
           // 如果回來的狀態不是 200，顯示回來的 message
           alert(error.response.data.message)
+          this.account = ''
+          this.password = ''
         })
     }
   }
