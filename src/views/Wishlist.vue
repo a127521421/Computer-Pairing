@@ -7,6 +7,9 @@
           <template v-slot:cell(src)="data">
             <img :src="data.item.src" style="width:100px">
           </template>
+          <template v-slot:cell(_id)="data">
+            <b-button  variant="danger" @click="jump(data.item._id)">跳轉網頁</b-button>
+          </template>
         </b-table>
       </b-col>
     </b-row>
@@ -32,8 +35,8 @@ export default {
           label: '價格'
         },
         {
-          key: 'click',
-          label: '清單'
+          key: '_id',
+          label: '跳轉'
         }
       ]
     }
@@ -44,25 +47,19 @@ export default {
     }
   },
   methods: {
-
+    jump (id) {
+      this.$router.push('/goods/' + id)
+    }
   },
   mounted () {
     this.axios.get(process.env.VUE_APP_APIURL + '/wishlist/' + this.user.account)
       .then(response => {
         this.goods = response.data.result2.map(d => {
           return {
-            // _id: d._id,
+            _id: d._id,
             src: process.env.VUE_APP_APIURL + '/commodity/' + d.image,
             name: d.name,
-            price: d.price,
-            // Screen: d.Screen,
-            // WorkingSystem: d.WorkingSystem,
-            // CPU: d.CPU,
-            // DRAM: d.DRAM,
-            // HDD: d.HDD,
-            // GPU: d.GPU,
-            // count: d.count,
-            click: true
+            price: d.price
           }
         })
       })
