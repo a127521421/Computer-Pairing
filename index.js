@@ -239,6 +239,12 @@ app.patch('/usersupdate/:id', async (req, res) => {
     res.send({ success: false, message: '格式不符' })
     return
   }
+  if (req.body.password.length < 4 || req.body.password.length > 20) {
+    // 回傳錯誤狀態碼
+    res.status(400)
+    res.send({ success: false, message: '密碼必須四個字以上，二十個字以下' })
+    return
+  }
   try {
     // 尋找後修改
     // findByIdAndUpdate 預設回傳的是更新前的資料

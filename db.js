@@ -26,14 +26,16 @@ const userSchema = new Schema({
   // 帳號
   account: {
     type: String,
-    minlength: [4, '帳號必須四個字以上'],
-    maxlength: [20, '帳號必須二十個字以下'],
+    minlength: [4, '帳號必須四個字以上，二十個字以下'],
+    maxlength: [20, '帳號必須四個字以上，二十個字以下'],
     unique: '帳號已使用',
     required: [true, '請輸入帳號']
   },
   // 密碼
   password: {
     type: String,
+    minlength: [4, '密碼必須四個字以上，二十個字以下'],
+    maxlength: [20, '密碼必須四個字以上，二十個字以下'],
     required: [true, '請輸入密碼']
   }
 }, {
