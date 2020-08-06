@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "91a403424813bef111ce",
+    "revision": "23cedabfcc4902eadd12",
     "url": "css/app.29883b4d.css"
   },
   {
-    "revision": "23b953e9cd98331b6915",
+    "revision": "0b1049736b93e206b5d4",
     "url": "css/chunk-vendors.084c0951.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/login.gif"
   },
   {
-    "revision": "1515b03da7bca977d7d7bf24b3d54f4b",
+    "revision": "79e41bf597f02446de2986ab2e4912d6",
     "url": "index.html"
   },
   {
@@ -28,16 +28,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/administrator.f9092b9c.js"
   },
   {
-    "revision": "91a403424813bef111ce",
-    "url": "js/app.721aafd9.js"
+    "revision": "23cedabfcc4902eadd12",
+    "url": "js/app.f4d09e48.js"
   },
   {
     "revision": "33285822d48c0f0abc6c",
     "url": "js/changepassword.ccf7264f.js"
   },
   {
-    "revision": "23b953e9cd98331b6915",
-    "url": "js/chunk-vendors.fc741903.js"
+    "revision": "0b1049736b93e206b5d4",
+    "url": "js/chunk-vendors.d7ecae3d.js"
   },
   {
     "revision": "af71d8b63ca24e4ec6d6",
