@@ -3,7 +3,7 @@
     <b-navbar toggleable="lg" type="dark" variant="dark">
       <b-container>
         <!-- LOGO -->
-        <b-navbar-brand to='/'><font-awesome-icon :icon="['fas', 'desktop']" id="icon"></font-awesome-icon>
+        <b-navbar-brand to='/'><img src="../src/assets/32x32.png">
         </b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
