@@ -20,6 +20,8 @@ import connectMongo from 'connect-mongo'
 import FTPStorage from 'multer-ftp'
 // 環境套件
 import dotenv from 'dotenv'
+// request
+import request from 'request'
 
 import db from './db.js'
 
@@ -457,7 +459,8 @@ app.get('/commodity/:image', async (req, res) => {
       res.send({ success: false, message: '找不到圖片' })
     }
   } else {
-    res.redirect('http://' + process.env.FTP_HOST + '/' + process.env.FTP_USER + '/' + req.params.image)
+    req.pipe(request('http://' + process.env.FTP_HOST + '/' + process.env.FTP_USER + '/' + req.params.image)).pipe(res)
+    // res.redirect('http://' + process.env.FTP_HOST + '/' + process.env.FTP_USER + '/' + req.params.image)
   }
 })
 
@@ -641,7 +644,8 @@ app.get('/carousel/:image', async (req, res) => {
       res.send({ success: false, message: '找不到圖片' })
     }
   } else {
-    res.redirect('http://' + process.env.FTP_HOST + '/' + process.env.FTP_USER + '/' + req.params.image)
+    req.pipe(request('http://' + process.env.FTP_HOST + '/' + process.env.FTP_USER + '/' + req.params.image)).pipe(res)
+    // res.redirect('http://' + process.env.FTP_HOST + '/' + process.env.FTP_USER + '/' + req.params.image)
   }
 })
 
