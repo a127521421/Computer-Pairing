@@ -36,30 +36,42 @@ const app = express()
 // 讓 express 使用 body-parser，並把收到的資料轉 json
 app.use(bodyParser.json())
 
-// 設定跨域的請求
+// 設定跨域套件
 app.use(cors({
-  // origin 來源網域
-  // callback(錯誤, 是否允許)
+  // origin 為請求來源網域, callback 為是否允許的回應
   origin (origin, callback) {
-    // 直接開網頁，不是 ajax 時，origin 是 undefined
-    if (origin === undefined) {
-      callback(null, true)
-    } else {
-      if (process.env.ALLOW_CORS === 'true') {
-        // 開發環境，允許
-        callback(null, true)
-      } else if (origin.includes('github')) {
-        // 非開發環境，但是從 github 過來，允許
-        callback(null, true)
-      } else {
-        // 不是開發也不是從 github 過來，拒絕
-        callback(new Error('Not allowed'), false)
-      }
-    }
+    // 允許任何來源網域的請求
+    callback(null, true)
   },
-  // 是否允許認證資訊
+  // 允許跨域認證
   credentials: true
 }))
+
+// 測試關閉
+// 設定跨域的請求
+// app.use(cors({
+//   // origin 來源網域
+//   // callback(錯誤, 是否允許)
+//   origin (origin, callback) {
+//     // 直接開網頁，不是 ajax 時，origin 是 undefined
+//     if (origin === undefined) {
+//       callback(null, true)
+//     } else {
+//       if (process.env.ALLOW_CORS === 'true') {
+//         // 開發環境，允許
+//         callback(null, true)
+//       } else if (origin.includes('github')) {
+//         // 非開發環境，但是從 github 過來，允許
+//         callback(null, true)
+//       } else {
+//         // 不是開發也不是從 github 過來，拒絕
+//         callback(new Error('Not allowed'), false)
+//       }
+//     }
+//   },
+//   // 是否允許認證資訊
+//   credentials: true
+// }))
 
 // 設定登陸狀態
 app.use(session({
@@ -645,7 +657,6 @@ app.get('/carousel/:image', async (req, res) => {
     }
   } else {
     req.pipe(request('http://' + process.env.FTP_HOST + '/' + process.env.FTP_USER + '/' + req.params.image)).pipe(res)
-    // res.redirect('http://' + process.env.FTP_HOST + '/' + process.env.FTP_USER + '/' + req.params.image)
   }
 })
 
