@@ -5,7 +5,7 @@ on:
   push:
     branches: [ master ]
 env:
-  VUE_APP_APIURL: https://computer-pairing.onrender.com
+  VUE_APP_APIURL: computer-pairing.onrender.com
 # 執行的工作
 jobs:
   # 工作名稱
