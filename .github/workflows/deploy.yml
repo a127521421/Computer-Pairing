@@ -4,6 +4,7 @@ name: Deploy
 on:
   push:
     branches: [ master ]
+# 環境變數
 env:
   VUE_APP_APIURL: computer-pairing.onrender.com
 # 執行的工作
