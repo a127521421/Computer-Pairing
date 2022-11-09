@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d4fc90e1f174e83ce0b2",
+    "revision": "7991ac7056318c06c881",
     "url": "css/app.29883b4d.css"
   },
   {
-    "revision": "f80e0cd7fc72c66c7f37",
+    "revision": "9c0157edd167ab42654b",
     "url": "css/chunk-vendors.084c0951.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/login.gif"
   },
   {
-    "revision": "fa5eb89ba28a2193f79389f5ec8ba3e5",
+    "revision": "886fdd4e3eae1b3b5301f1d91ebed80d",
     "url": "index.html"
   },
   {
@@ -28,48 +28,48 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/administrator.5a26b086.js"
   },
   {
-    "revision": "d4fc90e1f174e83ce0b2",
-    "url": "js/app.5986e025.js"
+    "revision": "7991ac7056318c06c881",
+    "url": "js/app.4372b294.js"
   },
   {
-    "revision": "48991a6d83ffbb136113",
-    "url": "js/changepassword.6e99ef93.js"
+    "revision": "fb4cad0bb38490852094",
+    "url": "js/changepassword.335a0dba.js"
   },
   {
-    "revision": "f80e0cd7fc72c66c7f37",
-    "url": "js/chunk-vendors.efe4ca1b.js"
+    "revision": "9c0157edd167ab42654b",
+    "url": "js/chunk-vendors.7b9b5a87.js"
   },
   {
-    "revision": "1338e5d0ff6f56a874d4",
-    "url": "js/goods.e5b1332b.js"
+    "revision": "c7efdbe46864f96629c3",
+    "url": "js/goods.7e3bd9fb.js"
   },
   {
-    "revision": "1eaca35ad6dfa4eb3c7f",
-    "url": "js/login.9a3f19e3.js"
+    "revision": "68fe33ad63aed658fac6",
+    "url": "js/login.1705f87b.js"
   },
   {
-    "revision": "c7e526544049ebcb9fe1",
-    "url": "js/managecarousels.09f2ef3d.js"
+    "revision": "3f863b99d36667b2f841",
+    "url": "js/managecarousels.9ab800d8.js"
   },
   {
-    "revision": "8c23c6353a9c96638143",
-    "url": "js/managegoods.01d68262.js"
+    "revision": "794313c6bd9c01b8509c",
+    "url": "js/managegoods.80b76854.js"
   },
   {
-    "revision": "2a04ea523c03e533429a",
-    "url": "js/reg.ba89c6c9.js"
+    "revision": "4f3915ecfd7e836f94bd",
+    "url": "js/reg.513a4dee.js"
   },
   {
-    "revision": "223c455cb82e9793a85d",
-    "url": "js/shopping.232a5358.js"
+    "revision": "50d85adc01766337bb28",
+    "url": "js/shopping.3bea4ccb.js"
   },
   {
     "revision": "bf9eda0ca9a224c24454",
     "url": "js/user.27c8c12b.js"
   },
   {
-    "revision": "fffa0ebf8bc50f538dce",
-    "url": "js/wishlist.959743b4.js"
+    "revision": "39828d628204ca7a4131",
+    "url": "js/wishlist.7b840804.js"
   },
   {
     "revision": "7dbdabe7132fa722ace0ae954b1cc514",
